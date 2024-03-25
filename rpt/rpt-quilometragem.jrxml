@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt-quilometragem" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="acf68355-7e7e-4f20-ba4c-fd7292d0c754">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<parameter name="P_VEICULO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_VEICULO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[" AND IDVEICULO =" + $P{P_VEICULO}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_VEICULOPLACA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_MESANO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_MESANO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{P_MESANO}.equals("")?"":" AND format(DT_QUILOMETRAGEM,'MM/yyyy') ='" + $P{P_MESANO} + "'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     TB_QUILOMETRAGEM.`ID` AS TB_QUILOMETRAGEM_ID,
+     TB_QUILOMETRAGEM.`IDVEICULO` AS TB_QUILOMETRAGEM_IDVEICULO,
+     TB_QUILOMETRAGEM.`QUILOMETRAGEM` AS TB_QUILOMETRAGEM_QUILOMETRAGEM,
+     TB_QUILOMETRAGEM.`DT_ADD` AS TB_QUILOMETRAGEM_DT_ADD,
+     TB_QUILOMETRAGEM.`DT_UPD` AS TB_QUILOMETRAGEM_DT_UPD,
+     TB_QUILOMETRAGEM.`DT_QUILOMETRAGEM` AS TB_QUILOMETRAGEM_DT_QUILOMETRAGEM
+FROM
+     `TB_QUILOMETRAGEM` TB_QUILOMETRAGEM
+WHERE TB_QUILOMETRAGEM.`ID` >=0
+$P!{SQL_VEICULO}
+$P!{SQL_MESANO}
+ORDER BY TB_QUILOMETRAGEM.`ID` DESC]]>
+	</queryString>
+	<field name="TB_QUILOMETRAGEM_ID" class="java.lang.Integer"/>
+	<field name="TB_QUILOMETRAGEM_IDVEICULO" class="java.lang.Integer"/>
+	<field name="TB_QUILOMETRAGEM_QUILOMETRAGEM" class="java.lang.Integer"/>
+	<field name="TB_QUILOMETRAGEM_DT_ADD" class="java.sql.Timestamp"/>
+	<field name="TB_QUILOMETRAGEM_DT_UPD" class="java.sql.Timestamp"/>
+	<field name="TB_QUILOMETRAGEM_DT_QUILOMETRAGEM" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="1" width="555" height="81" uuid="713a875c-2a29-4074-8c1e-79d1ee80ddc1"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<image>
+					<reportElement x="7" y="6" width="59" height="51" uuid="c5ef4a99-b544-4066-a870-8561651d13d4"/>
+					<imageExpression><![CDATA["icons.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement style="Column header" x="3" y="64" width="66" height="15" forecolor="#000000" uuid="d598549e-8d1b-4518-b801-613cce506966"/>
+					<textElement textAlignment="Center">
+						<font fontName="Century Gothic" size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[CONTROLCAR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="2" y="24" width="553" height="18" forecolor="#000000" uuid="96f27736-d69c-4c48-b673-1350712c0519"/>
+					<textElement textAlignment="Center">
+						<font fontName="Century Gothic" isBold="true"/>
+					</textElement>
+					<text><![CDATA[QUILOMETRAGEM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="3" y="41" width="552" height="15" forecolor="#000000" uuid="14a9e2fe-e663-4c1d-8f1d-32700ee6589a"/>
+					<textElement textAlignment="Center">
+						<font fontName="Century Gothic" size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório do cadastro de quilometragem]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="4" y="49" width="36" height="13" forecolor="#000000" uuid="73e471cd-c7dd-4abd-8bd8-e00b5b721ee9"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Opaque" x="4" y="65" width="540" height="2" forecolor="#666666" uuid="87ba0ade-efe1-4a0e-b6ae-1f73012b9860"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="42" y="49" width="93" height="13" forecolor="#000000" uuid="fe21e541-a2f6-43b9-863a-5ddd11325f0c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUILOMETRAGEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="135" y="49" width="112" height="13" forecolor="#000000" uuid="98e4ab08-6137-4012-a888-b40b35757e83"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DT. QUILOMETRAGEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="247" y="49" width="112" height="13" forecolor="#000000" uuid="c6ea05e8-192d-4e38-9aa5-acd4175ab8a7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DT. INCLUSÃO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="4" width="179" height="13" uuid="620e3f6d-d4d5-45b9-bf8b-ec43957c2b73"/>
+				<box rightPadding="5"/>
+				<textElement>
+					<font fontName="Century Gothic" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_VEICULOPLACA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="8" y="4" width="56" height="13" forecolor="#000000" uuid="40e30274-1a32-404d-8b83-5c25825b3e2b"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VEÍCULO:]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Opaque" x="5" y="45" width="540" height="2" forecolor="#666666" uuid="8ef8bf0e-2cc5-4a60-91a9-8ac34a8e80c5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="4" y="2" width="37" height="12" uuid="59a95907-85c6-4247-8d6c-378bddcf37c1"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_QUILOMETRAGEM_ID}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="41" y="2" width="94" height="12" uuid="98913549-8cd3-4e26-af79-7fed5046476e"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_QUILOMETRAGEM_QUILOMETRAGEM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="135" y="2" width="112" height="12" uuid="c6ec412c-9ca5-4bed-a6c5-65a71a462582"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_QUILOMETRAGEM_DT_QUILOMETRAGEM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="247" y="2" width="112" height="12" uuid="c7ad830c-c7e8-4844-b6df-7a3a02394de5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_QUILOMETRAGEM_DT_ADD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="387" y="5" width="96" height="15" forecolor="#000000" uuid="01e61a75-6bd5-4663-be9b-ed9dc95f62d2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="11" y="5" width="197" height="15" forecolor="#000000" uuid="e8b05a80-4849-40e0-9883-cb32734b2331"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="483" y="5" width="42" height="15" forecolor="#000000" uuid="9d19d729-ff3e-4c3a-9a56-b713ad13bda8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="25" width="150" height="12" uuid="8d87de8b-92f0-4ded-8628-a9731792f78b"/>
+				<textElement>
+					<font fontName="Century Gothic" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade total de registros:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="161" y="25" width="97" height="12" uuid="3fa24d00-2a7b-4ea1-bf91-0c5cbfdb99a2"/>
+				<textElement>
+					<font fontName="Century Gothic" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

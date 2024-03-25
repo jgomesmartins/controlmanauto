@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt-tipo-manutencao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="322c5bcf-bc1a-4acc-8bd2-e689b679c192">
+	<property name="ireport.zoom" value="1.8181818181818181"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<parameter name="P_TIPO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="P_DESCRICAO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_TIPO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{P_TIPO}.equals(-1)?"":" AND TIPO =" + $P{P_TIPO}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_DESCRICAO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{P_DESCRICAO}.equals("")?"":" AND DESCRICAO LIKE '%" + $P{P_DESCRICAO} + "%'"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     TB_TIPO_MANUTENCAO.`ID` AS TB_TIPO_MANUTENCAO_ID,
+     TB_TIPO_MANUTENCAO.`TIPO` AS TB_TIPO_MANUTENCAO_TIPO,
+     TB_TIPO_MANUTENCAO.`DESCRICAO` AS TB_TIPO_MANUTENCAO_DESCRICAO,
+     TB_TIPO_MANUTENCAO.`MESES` AS TB_TIPO_MANUTENCAO_MESES,
+     TB_TIPO_MANUTENCAO.`DT_ADD` AS TB_TIPO_MANUTENCAO_DT_ADD,
+     TB_TIPO_MANUTENCAO.`DT_UPD` AS TB_TIPO_MANUTENCAO_DT_UPD,
+     TB_TIPO_MANUTENCAO.`QUILOMETRAGEM` AS TB_TIPO_MANUTENCAO_QUILOMETRAGEM
+FROM
+     `TB_TIPO_MANUTENCAO` TB_TIPO_MANUTENCAO
+WHERE  TB_TIPO_MANUTENCAO.`ID` >=0
+$P!{SQL_TIPO}
+$P!{SQL_DESCRICAO}
+ORDER BY TB_TIPO_MANUTENCAO.`DESCRICAO`]]>
+	</queryString>
+	<field name="TB_TIPO_MANUTENCAO_ID" class="java.lang.Integer"/>
+	<field name="TB_TIPO_MANUTENCAO_TIPO" class="java.lang.Integer"/>
+	<field name="TB_TIPO_MANUTENCAO_DESCRICAO" class="java.lang.String"/>
+	<field name="TB_TIPO_MANUTENCAO_MESES" class="java.lang.Integer"/>
+	<field name="TB_TIPO_MANUTENCAO_DT_ADD" class="java.sql.Timestamp"/>
+	<field name="TB_TIPO_MANUTENCAO_DT_UPD" class="java.sql.Timestamp"/>
+	<field name="TB_TIPO_MANUTENCAO_QUILOMETRAGEM" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="81" uuid="eebfa498-5aa2-4c04-a480-d0492391efdc"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<image>
+					<reportElement x="7" y="6" width="59" height="51" uuid="f52afb32-4cd5-45ed-84cc-ad9cff3a8719"/>
+					<imageExpression><![CDATA["C:\\Users\\gomes\\Documents\\NetBeansProjects\\br.com.controlmanauto\\src\\IMG\\icons8-serviços-filled-100.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement style="Column header" x="3" y="64" width="66" height="15" forecolor="#000000" uuid="d1a25a59-b4fb-4a39-afe5-fb772eca3b23"/>
+					<textElement textAlignment="Center">
+						<font fontName="Century Gothic" size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[CONTROLCAR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="2" y="24" width="553" height="18" forecolor="#000000" uuid="2496df9f-1d32-4967-9226-337fc7d35745"/>
+					<textElement textAlignment="Center">
+						<font fontName="Century Gothic" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PEÇAS E SERVIÇOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="3" y="41" width="552" height="15" forecolor="#000000" uuid="5f4a7044-648f-4994-b1ec-8d8be8cb510a"/>
+					<textElement textAlignment="Center">
+						<font fontName="Century Gothic" size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório do cadastro de peças e serviços]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="11" y="16" width="36" height="13" forecolor="#000000" uuid="6352d5b2-d62b-42c2-8629-3a11056025e4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Opaque" x="8" y="31" width="535" height="1" forecolor="#666666" uuid="b9181af9-5c18-4e8e-8915-e6c76c06f5d7"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="49" y="16" width="179" height="13" forecolor="#000000" uuid="3d8fc468-a8dd-4a63-a160-fb0e0ce0b048"/>
+				<textElement>
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="322" y="15" width="89" height="13" forecolor="#000000" uuid="7b7199d9-f8f0-4440-ace3-8fd548d2b073"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MESES VALIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="411" y="15" width="111" height="13" forecolor="#000000" uuid="6f6026ba-a00e-4258-9fec-6865d2a647bc"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Gothic" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KM VALIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="15" width="94" height="14" uuid="22654180-860c-4591-ad04-77a7f27ba69d"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="36" height="16" uuid="31cadad1-cb48-4c44-9dfe-59e006ea05bd"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_TIPO_MANUTENCAO_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="0" width="181" height="16" uuid="360c7ba0-7463-4033-a890-28b03e3543b2"/>
+				<textElement>
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_TIPO_MANUTENCAO_DESCRICAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="0" width="89" height="16" uuid="01dfab6f-f321-49ab-bf5b-4efc68aff593"/>
+				<textElement textAlignment="Center">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_TIPO_MANUTENCAO_MESES}.equals(-1)?"":$F{TB_TIPO_MANUTENCAO_MESES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="411" y="0" width="111" height="16" uuid="68d7ff6d-74c6-4cf1-9224-1f238c9fe60b"/>
+				<textElement textAlignment="Right">
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_TIPO_MANUTENCAO_QUILOMETRAGEM}]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<textField>
+				<reportElement x="228" y="0" width="94" height="16" uuid="7adeb549-d13a-4c10-8758-747ae0166543"/>
+				<textElement>
+					<font fontName="Century Gothic" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TB_TIPO_MANUTENCAO_TIPO}.equals(1)?"PEÇA":"SERVIÇO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="11" y="0" width="197" height="15" forecolor="#000000" uuid="a713b5df-fd8f-4492-b667-c506e9d78ca0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="480" y="0" width="42" height="15" forecolor="#000000" uuid="35de4780-84ba-4a00-b5fa-00d23c32a73f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="384" y="0" width="96" height="15" forecolor="#000000" uuid="2b9b4fdb-8b0d-4d88-bea8-2f1c41a8ab4b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="8" y="30" width="150" height="12" uuid="1ad63243-649d-4e06-a68f-0ddc017a97ed"/>
+				<textElement>
+					<font fontName="Century Gothic" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade total de registros:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="158" y="30" width="97" height="12" uuid="457a66a3-222c-4440-9609-969b1eea9ee9"/>
+				<textElement>
+					<font fontName="Century Gothic" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
